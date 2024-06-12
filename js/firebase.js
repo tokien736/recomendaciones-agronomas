@@ -1,10 +1,10 @@
-// firebase.js
-
+// Importa las funciones necesarias de Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
+// Configuración de Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyDyIV7FPBcJm7B26FxIy2o4BTKfWioVrdQ",
+  apiKey: "YOUR_API_KEY",
   authDomain: "agronomia-81952.firebaseapp.com",
   databaseURL: "https://agronomia-81952-default-rtdb.firebaseio.com",
   projectId: "agronomia-81952",
@@ -13,23 +13,29 @@ const firebaseConfig = {
   appId: "1:22395384649:web:f8280ba23e5195940a2098"
 };
 
+// Inicializa la aplicación de Firebase
 const firebaseApp = initializeApp(firebaseConfig);
+// Obtiene la instancia de la base de datos de Firebase
 const database = getDatabase(firebaseApp);
+// Referencia a los datos en la base de datos
 const dataRef = ref(database, '/datos');
 
-// Escuchar cambios en la referencia de datos
+// Función que se ejecuta cada vez que hay un cambio en los datos referenciados
 onValue(dataRef, (snapshot) => {
+  // Obtiene los datos de la instantánea
   const datos = snapshot.val();
 
-  // Filtrar y limpiar datos
+  // Procesa y limpia los datos
   const datosLimpios = datos.map(d => ({
     humedad: d.humedad,
-    humedad_suelo: d.humedad_suelo,
-    temperatura: d.temperatura || d.temperature // Corregir posibles errores de propiedad
+    humedad_suelo: convertirHumedadSuelo(d.humedad_suelo),
+    temperatura: d.temperatura || d.temperature
   })).filter(d => typeof d.temperatura === 'number' && !isNaN(d.temperatura));
 
-  // Calcular promedios
+  // Calcula el número total de lecturas
   const totalLecturas = datosLimpios.length;
+
+  // Suma las lecturas de humedad, humedad del suelo y temperatura
   const sumas = datosLimpios.reduce((acc, lectura) => {
     acc.humedad += lectura.humedad;
     acc.humedad_suelo += lectura.humedad_suelo;
@@ -37,102 +43,53 @@ onValue(dataRef, (snapshot) => {
     return acc;
   }, { humedad: 0, humedad_suelo: 0, temperatura: 0 });
 
+  // Calcula los promedios de humedad, humedad del suelo y temperatura
   const promedios = {
     humedad: sumas.humedad / totalLecturas,
     humedad_suelo: sumas.humedad_suelo / totalLecturas,
     temperatura: sumas.temperatura / totalLecturas,
   };
 
+  // Muestra los promedios calculados en la consola
   console.log("Promedios calculados:", promedios);
 
-  // Mostrar los promedios en el elemento con id "datosFirebase"
-  const datosFirebaseElement = document.getElementById('datosFirebase');
-  datosFirebaseElement.innerHTML = JSON.stringify(promedios, null, 2);
+  // Actualiza el contenido de los elementos HTML con los valores promedio
+  document.getElementById('humedad-ambiental').innerText = `${promedios.humedad.toFixed(2)}%`;
+  document.getElementById('humedad-suelo').innerText = `${promedios.humedad_suelo.toFixed(2)}`;
+  document.getElementById('temperatura').innerText = `${promedios.temperatura.toFixed(2)}°C`;
 
-  // Crear gráficas circulares para humedad y humedad del suelo
-  createDoughnutChart('humedadChart', 'Humedad', promedios.humedad);
-  createDoughnutChart('humedadSueloChart', 'Humedad del Suelo', promedios.humedad_suelo);
-
-  // Mostrar promedio de temperatura en el elemento con id "promedioTemperatura"
-  const promedioTemperaturaElement = document.getElementById('promedioTemperatura');
-  promedioTemperaturaElement.innerHTML = `Promedio de Temperatura: ${promedios.temperatura.toFixed(2)}°C`;
-
-  // Crear gráfica de barras para los promedios
-  createBarChart('promediosChart', promedios);
+  // Llama a las funciones para actualizar las escalas y el termómetro
+  actualizarHumedad(promedios.humedad, 'humidity-scale');
+  actualizarHumedad(promedios.humedad_suelo, 'soil-humidity-scale', 1023);
+  actualizarTemperatura(promedios.temperatura);
 });
 
-function createDoughnutChart(chartId, label, promedio) {
-  const ctx = document.getElementById(chartId).getContext('2d');
-  const data = {
-    labels: [label],
-    datasets: [{
-      data: [promedio],
-      backgroundColor: ['rgba(54, 162, 235, 0.2)'],
-      borderColor: ['rgba(54, 162, 235, 1)'],
-      borderWidth: 1
-    }]
-  };
-
-  new Chart(ctx, {
-    type: 'doughnut',
-    data: data,
-    options: {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'top',
-        },
-        title: {
-          display: true,
-          text: `Promedio de ${label}`
-        }
-      }
-    },
-  });
+// Función para convertir el valor de humedad del suelo, si es necesario
+function convertirHumedadSuelo(valor) {
+  return valor; // Si ya está en la escala de 1 a 1023, no necesitamos convertirlo
 }
 
-function createBarChart(chartId, promedios) {
-  const ctx = document.getElementById(chartId).getContext('2d');
-  const data = {
-    labels: ['Humedad', 'Humedad del Suelo', 'Temperatura'],
-    datasets: [{
-      label: 'Promedios',
-      data: [promedios.humedad, promedios.humedad_suelo, promedios.temperatura],
-      backgroundColor: [
-        'rgba(75, 192, 192, 0.2)',
-        'rgba(153, 102, 255, 0.2)',
-        'rgba(255, 159, 64, 0.2)'
-      ],
-      borderColor: [
-        'rgba(75, 192, 192, 1)',
-        'rgba(153, 102, 255, 1)',
-        'rgba(255, 159, 64, 1)'
-      ],
-      borderWidth: 1
-    }]
-  };
-
-  new Chart(ctx, {
-    type: 'bar',
-    data: data,
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      },
-      plugins: {
-        legend: {
-          display: false
-        },
-        title: {
-          display: true,
-          text: 'Promedios de Humedad, Humedad del Suelo y Temperatura'
-        }
-      }
-    },
-  });
+// Función para actualizar la escala de humedad
+function actualizarHumedad(promedio, scaleClass, max = 100) {
+  const escala = document.querySelector(`.${scaleClass}`);
+  const indicador = document.createElement('div');
+  const porcentaje = (promedio / max) * 100; // Convertir el valor a porcentaje
+  indicador.style.position = 'absolute';
+  indicador.style.top = '0';
+  indicador.style.left = `${porcentaje}%`;
+  indicador.style.transform = 'translateX(-50%)';
+  indicador.style.width = '2px';
+  indicador.style.height = '100%';
+  indicador.style.backgroundColor = 'black';
+  escala.appendChild(indicador);
 }
 
-export { firebaseApp, database, dataRef, onValue };
+// Función para actualizar el termómetro con la temperatura promedio
+function actualizarTemperatura(promedio) {
+  const mercury = document.getElementById('mercury');
+  const altura = (promedio / 50) * 100; // Escalar la temperatura a la altura del termómetro
+  mercury.style.height = `${altura}%`;
+
+  const indicator = document.getElementById('temp-indicator');
+  indicator.style.bottom = `${altura}%`;
+}

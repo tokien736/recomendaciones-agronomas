@@ -1,0 +1,27 @@
+# Ignorar archivos de compilación y ejecutables
+*.o
+*.out
+*.exe
+
+# Ignorar archivos generados por IDEs y editores de texto
+.vscode/
+.idea/
+*.iml
+*.ipynb_checkpoints/
+
+# Ignorar archivos y directorios de dependencias de Node.js
+node_modules/
+npm-debug.log
+
+# Ignorar archivos de entornos virtuales de Python
+venv/
+__pycache__/
+
+# Ignorar archivos de registros y temporales
+logs/
+*.log
+*.tmp
+
+# Ignorar archivos específicos
+config.ini
+secrets.json

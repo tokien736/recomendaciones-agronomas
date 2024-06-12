@@ -3,14 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agronomia</title>
+    <title>Agronomía</title>
     <!-- Incluir CSS de Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+    <!-- Barra de navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Agronomia</a>
+        <a class="navbar-brand" href="#">Agronomía</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -29,18 +30,21 @@
         </div>
     </nav>
 
+    <!-- Contenedor principal -->
     <div class="container-fluid">
         <div class="row half-height">
+            <!-- Columna para el mapa -->
             <div class="col-md-6">
                 <div id="map" class="border"></div>
             </div>
+            <!-- Columna para la información del clima -->
             <div class="col-md-6 d-flex align-items-center justify-content-center">
                 <div id="weather" class="alert alert-info"></div>
             </div>
         </div>
     </div>
 
-
+    <!-- Pie de página -->
     <footer class="footer-bottom mt-auto py-3 bg-dark">
         <div class="container text-white text-center">
             <span class="text-muted">Todos los derechos reservados</span>
@@ -52,6 +56,7 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
+    <!-- Incluir API de Google Maps y archivos JavaScript -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjw63FGwrrC3Q2XcLyhoDyLula_YUa9Mw&callback=initMap" async defer></script>
     <script src="js/maps.js"></script>
     <script src="js/weather.js"></script>
