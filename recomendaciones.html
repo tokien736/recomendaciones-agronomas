@@ -4,12 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agronomía</title>
-    <!-- Incluir CSS de Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <!-- Cargar Firebase y TensorFlow.js desde CDNs -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0/dist/tf.min.js"></script>
+    <script src="./js/firebase.js"></script>
+    <script src="./js/recommendation.js" type="module"></script>
 </head>
 <body>
-    <!-- Barra de navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="#">Agronomía</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -33,23 +37,25 @@
         </div>
     </nav>
 
-    <!-- Contenedor principal -->
+    <div class="container mt-5">
+        <h1 class="text-center">Sistema de Recomendaciones Agrónomas</h1>
+        <div id="sensor-data" class="form-group">
+            <p>Humedad Ambiental: <span id="humedad-ambiental">-</span>%</p>
+            <p>Humedad del Suelo: <span id="humedad-suelo">-</span></p>
+            <p>Temperatura: <span id="temperatura">-</span>°C</p>
+        </div>
+        <button id="recomendarBtn" class="btn btn-primary">Obtener Recomendación</button>
+        <div id="result" class="mt-4" style="border: 1px solid #ccc; padding: 10px; background-color: #f9f9f9;"></div>
+    </div>
 
-    <!-- Pie de página -->
     <footer class="footer-bottom mt-auto py-3 bg-dark">
         <div class="container text-white text-center">
             <span class="text-muted">Todos los derechos reservados</span>
         </div>
     </footer>
 
-    <!-- Incluir JS de Bootstrap y dependencias -->
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <!-- Incluir API de Google Maps y archivos JavaScript -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAjw63FGwrrC3Q2XcLyhoDyLula_YUa9Mw&callback=initMap" async defer></script>
-    <script src="js/maps.js"></script>
-    <script src="js/weather.js"></script>
 </body>
 </html>
