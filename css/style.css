@@ -1,8 +1,10 @@
+/* Estilos para el contenedor del mapa */
 #map {
-    height: 400px;
-    width: 100%;
-}
-#weather {
-    margin-top: 20px;
+    height: 400px; /* Altura del mapa */
+    width: 100%; /* Ancho del mapa, se ajustará al ancho del contenedor padre */
 }
 
+/* Estilos para la sección de información meteorológica */
+#weather {
+    margin-top: 20px; /* Espacio en la parte superior de la sección meteorológica */
+}

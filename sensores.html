@@ -11,10 +11,10 @@
   <!-- Enlace a la librería Chart.js para gráficos -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <!-- Scripts de JavaScript -->
-  <script type="module" src="js/firebase.js"></script>
-  <script type="module" src="js/graficas.js"></script>
-  <script type="module" src="js/maps.js"></script>
-  <script type="module" src="js/weather.js"></script>
+  <script type="module" src="js/firebase.js"></script> <!-- Carga el archivo de Firebase -->
+  <script type="module" src="js/graficas.js"></script> <!-- Carga el archivo de gráficas -->
+  <script type="module" src="js/maps.js"></script> <!-- Carga el archivo de mapas -->
+  <script type="module" src="js/weather.js"></script> <!-- Carga el archivo de clima -->
   <!-- Enlace a la hoja de estilos personalizada -->
   <link rel="stylesheet" href="css/styleSensores.css">
 </head>
@@ -46,13 +46,14 @@
     <!-- Sección para Humedad Ambiental -->
     <div class="container mt-5">
       <h1 class="text-center">Humedad Ambiental</h1>
+      <!-- Escala para la humedad ambiental -->
       <div class="humidity-scale">
           <div class="range too-dry">SECO</div>
           <div class="range optimal">OPTIMO</div>
           <div class="range too-humid">MUY HUMEDOS</div>
       </div>
+      <!-- Niveles de humedad -->
       <div class="d-flex justify-content-between mt-2 numbers">
-          <!-- Niveles de humedad -->
           <span>0</span>
           <span>10</span>
           <span>20</span>
@@ -70,13 +71,14 @@
   <!-- Sección para Humedad del Suelo -->
   <div class="container mt-5">
       <h1 class="text-center">Humedad del Suelo</h1>
+      <!-- Escala para la humedad del suelo -->
       <div class="soil-humidity-scale">
           <div class="range too-dry">SECO</div>
           <div class="range optimal">OPTIMO</div>
           <div class="range too-humid">MUY HUMEDOS</div>
       </div>
+      <!-- Niveles de humedad del suelo -->
       <div class="d-flex justify-content-between mt-2 numbers">
-          <!-- Niveles de humedad del suelo -->
           <span>1</span>
           <span>103</span>
           <span>205</span>
@@ -94,12 +96,13 @@
   <!-- Sección del termómetro -->
   <div class="container mt-5 d-flex justify-content-center">
       <div class="thermometer">
+          <!-- Termómetro -->
           <div class="stem">
               <div class="mercury" id="mercury"></div>
               <div class="indicator-line" id="temp-indicator"></div>
           </div>
+          <!-- Escala de temperatura -->
           <div class="ticks">
-              <!-- Escala de temperatura -->
               <div class="tick">0°C</div>
               <div class="tick">10°C</div>
               <div class="tick">20°C</div>
@@ -113,6 +116,7 @@
   <!-- Contenedor de datos -->
   <div class="container mt-5 data-container">
       <h3>Datos de Humedad y Temperatura</h3>
+      <!-- Datos de humedad y temperatura -->
       <div class="data-item">
           <span>Humedad Ambiental:</span>
           <span id="humedad-ambiental"></span>
@@ -136,6 +140,6 @@
     <!-- Scripts de Firebase -->
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js"></script>
-    <script src="js/firebase.js" type="module"></script>
+    <script src="js/firebase.js" type="module"></script> <!-- Carga el archivo de Firebase -->
 </body>
 </html>
