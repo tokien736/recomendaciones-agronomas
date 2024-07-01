@@ -13,6 +13,8 @@
 node_modules/
 npm-debug.log
 
+
+
 # Ignorar archivos de entornos virtuales de Python
 venv/
 __pycache__/

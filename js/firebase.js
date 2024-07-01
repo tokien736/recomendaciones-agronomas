@@ -18,6 +18,11 @@ const firebaseApp = initializeApp(firebaseConfig);
 const database = getDatabase(firebaseApp); // Obtiene la referencia a la base de datos
 const dataRef = ref(database, '/datos'); // Referencia a la ubicación específica en la base de datos donde se encuentran los datos
 
+// Función para convertir la humedad del suelo de una escala de 1-1023 a una escala de 1-100
+function convertirHumedadSuelo(valor) {
+  return (valor / 1023) * 100;
+}
+
 // Evento que se dispara cuando hay cambios en los datos de la base de datos
 onValue(dataRef, (snapshot) => {
   const datos = snapshot.val(); // Obtiene los datos de la instantánea del snapshot
@@ -46,16 +51,16 @@ onValue(dataRef, (snapshot) => {
   };
 
   // Muestra los promedios en el documento HTML
-  document.getElementById('humedad-ambiental').innerText = `${promedios.humedad.toFixed(2)}`;
-  document.getElementById('humedad-suelo').innerText = `${promedios.humedad_suelo.toFixed(2)}`;
-  document.getElementById('temperatura').innerText = `${promedios.temperatura.toFixed(2)}`;
+  document.getElementById('humedad-ambiental').innerText = `${promedios.humedad.toFixed(2)}%`;
+  document.getElementById('humedad-suelo').innerText = `${promedios.humedad_suelo.toFixed(2)}%`;
+  document.getElementById('temperatura').innerText = `${promedios.temperatura.toFixed(2)}°C`;
 
   // Actualiza la visualización de la humedad en las escalas
   if (document.querySelector('.humidity-scale')) {
     actualizarHumedad(promedios.humedad, 'humidity-scale');
   }
   if (document.querySelector('.soil-humidity-scale')) {
-    actualizarHumedad(promedios.humedad_suelo, 'soil-humidity-scale', 1023);
+    actualizarHumedad(promedios.humedad_suelo, 'soil-humidity-scale', 100);
   }
 
   // Actualiza la visualización de la temperatura en el termómetro
@@ -63,11 +68,6 @@ onValue(dataRef, (snapshot) => {
     actualizarTemperatura(promedios.temperatura);
   }
 });
-
-// Función para convertir la humedad del suelo
-function convertirHumedadSuelo(valor) {
-  return valor;
-}
 
 // Función para actualizar la visualización de la humedad en las escalas
 function actualizarHumedad(promedio, scaleClass, max = 100) {
@@ -100,4 +100,4 @@ function actualizarTemperatura(promedio) {
 }
 
 // Exporta referencias a la base de datos y funciones de Firebase
-export { database, ref, onValue };
+export { database, ref, onValue, dataRef };
