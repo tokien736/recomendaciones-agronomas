@@ -40,21 +40,50 @@ document.addEventListener('DOMContentLoaded', async () => {
                 acc.temperatura += lectura.temperatura;
                 return acc;
             }, { humedad: 0, humedad_suelo: 0, temperatura: 0 });
+
             const promedios = {
                 humedad: sumas.humedad / totalLecturas,
                 humedad_suelo: sumas.humedad_suelo / totalLecturas,
                 temperatura: sumas.temperatura / totalLecturas,
             };
 
-            document.getElementById('humedad-ambiental').innerText = `${promedios.humedad.toFixed(2)}%`;
-            document.getElementById('humedad-suelo').innerText = `${promedios.humedad_suelo.toFixed(2)}%`;
-            document.getElementById('temperatura').innerText = `${promedios.temperatura.toFixed(2)}°C`;
+            // Verificar si los elementos existen antes de modificar el DOM
+            const humidityElement = document.getElementById('humedad-ambiental');
+            const soilHumidityElement = document.getElementById('humedad-suelo');
+            const temperatureElement = document.getElementById('temperatura');
+
+            if (humidityElement) {
+                humidityElement.innerText = `${promedios.humedad.toFixed(2)}%`;
+            } else {
+                console.error('Elemento "humedad-ambiental" no encontrado en el DOM.');
+            }
+
+            if (soilHumidityElement) {
+                soilHumidityElement.innerText = `${promedios.humedad_suelo.toFixed(2)}%`;
+            } else {
+                console.error('Elemento "humedad-suelo" no encontrado en el DOM.');
+            }
+
+            if (temperatureElement) {
+                temperatureElement.innerText = `${promedios.temperatura.toFixed(2)}°C`;
+            } else {
+                console.error('Elemento "temperatura" no encontrado en el DOM.');
+            }
         });
 
         document.getElementById('recomendarBtn').addEventListener('click', async () => {
-            const humedad = parseFloat(document.getElementById('humedad-ambiental').innerText);
-            const humedadSuelo = parseFloat(document.getElementById('humedad-suelo').innerText);
-            const temperatura = parseFloat(document.getElementById('temperatura').innerText);
+            const humidityElement = document.getElementById('humedad-ambiental');
+            const soilHumidityElement = document.getElementById('humedad-suelo');
+            const temperatureElement = document.getElementById('temperatura');
+
+            if (!humidityElement || !soilHumidityElement || !temperatureElement) {
+                console.error('Uno o más elementos no existen en el DOM.');
+                return;
+            }
+
+            const humedad = parseFloat(humidityElement.innerText);
+            const humedadSuelo = parseFloat(soilHumidityElement.innerText);
+            const temperatura = parseFloat(temperatureElement.innerText);
 
             const recomendacion = await recomendar(humedad, humedadSuelo, temperatura);
 
@@ -74,9 +103,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                     </ul>
                 `;
 
-                // Agrega los marcadores de lugares recomendados al mapa
                 lugaresRecomendados.forEach(lugar => {
-                    // Aquí deberías definir las coordenadas para cada lugar
                     const coordenadas = getCoordinates(lugar);
                     addMarker(map, coordenadas.lat, coordenadas.lng, lugar);
                 });

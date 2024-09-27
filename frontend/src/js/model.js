@@ -1,19 +1,21 @@
-import * as tf from 'https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.9.0/dist/tf.min.js';
-import { database, ref, onValue, dataRef } from './firebase.js';
+import * as tf from '@tensorflow/tfjs';
+import { database, ref, onValue, dataRef } from './firebase'; // Ajusta la ruta según la estructura de tu proyecto
 
-// Define la función convertirHumedadSuelo
+// Función para convertir la humedad del suelo de 0-1023 a 0-100
 function convertirHumedadSuelo(valor) {
     return (valor / 1023) * 100;
 }
 
+// Cargar los datos del archivo JSON
 async function loadCultivos() {
-    const response = await fetch('./condiciones_cultivos.json');
+    const response = await fetch('/condiciones_cultivos.json'); // Asegúrate de que el JSON esté en 'public'
     if (!response.ok) {
         throw new Error('Failed to load cultivos JSON');
     }
     return await response.json();
 }
 
+// Cargar datos de Firebase y preprocesarlos
 async function loadData() {
     return new Promise((resolve, reject) => {
         onValue(dataRef, (snapshot) => {
@@ -39,6 +41,7 @@ async function loadData() {
     });
 }
 
+// Crear y entrenar el modelo de TensorFlow
 async function createAndTrainModel() {
     try {
         const features = await loadData();
@@ -62,6 +65,7 @@ async function createAndTrainModel() {
     }
 }
 
+// Función para recomendar cultivos basados en las condiciones actuales
 async function recomendar(humedad, humedadSuelo, temperatura) {
     try {
         const cultivos = await loadCultivos();

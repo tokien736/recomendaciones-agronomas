@@ -4,7 +4,7 @@ import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.
 
 // Configuración de Firebase
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
+  apiKey: "AIzaSyDyIV7FPBcJm7B26FxIy2o4BTKfWioVrdQ",
   authDomain: "agronomia-81952.firebaseapp.com",
   databaseURL: "https://agronomia-81952-default-rtdb.firebaseio.com",
   projectId: "agronomia-81952",
@@ -50,10 +50,36 @@ onValue(dataRef, (snapshot) => {
     temperatura: sumas.temperatura / totalLecturas,
   };
 
-  // Muestra los promedios en el documento HTML
-  document.getElementById('humedad-ambiental').innerText = `${promedios.humedad.toFixed(2)}%`;
-  document.getElementById('humedad-suelo').innerText = `${promedios.humedad_suelo.toFixed(2)}%`;
-  document.getElementById('temperatura').innerText = `${promedios.temperatura.toFixed(2)}°C`;
+  // Verificar si los elementos existen antes de modificar el DOM
+  const humidityElement = document.getElementById('humedad-ambiental');
+  const soilHumidityElement = document.getElementById('humedad-suelo');
+  const temperatureElement = document.getElementById('temperatura');
+  const mercuryElement = document.getElementById('mercury');
+
+  if (humidityElement) {
+    humidityElement.innerText = `${promedios.humedad.toFixed(2)}%`;
+  } else {
+    console.error('Elemento "humedad-ambiental" no encontrado en el DOM.');
+  }
+
+  if (soilHumidityElement) {
+    soilHumidityElement.innerText = `${promedios.humedad_suelo.toFixed(2)}%`;
+  } else {
+    console.error('Elemento "humedad-suelo" no encontrado en el DOM.');
+  }
+
+  if (temperatureElement) {
+    temperatureElement.innerText = `${promedios.temperatura.toFixed(2)}°C`;
+  } else {
+    console.error('Elemento "temperatura" no encontrado en el DOM.');
+  }
+
+  // Actualiza la visualización de la temperatura en el termómetro
+  if (mercuryElement) {
+    actualizarTemperatura(promedios.temperatura);
+  } else {
+    console.error('Elemento "mercury" no encontrado en el DOM.');
+  }
 
   // Actualiza la visualización de la humedad en las escalas
   if (document.querySelector('.humidity-scale')) {
@@ -61,11 +87,6 @@ onValue(dataRef, (snapshot) => {
   }
   if (document.querySelector('.soil-humidity-scale')) {
     actualizarHumedad(promedios.humedad_suelo, 'soil-humidity-scale', 100);
-  }
-
-  // Actualiza la visualización de la temperatura en el termómetro
-  if (document.getElementById('mercury')) {
-    actualizarTemperatura(promedios.temperatura);
   }
 });
 

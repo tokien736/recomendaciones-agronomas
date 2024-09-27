@@ -1,6 +1,6 @@
 // Función para obtener el clima usando la API de OpenWeatherMap
 function getWeather(lat, lng) {
-    var apiKey = 'a7e8faeb16d2ecfb7ec83a580e1207b1'; // Clave API de OpenWeatherMap (reemplazar con tu propia clave)
+    var apiKey = 'a7e8faeb16d2ecfb7ec83a580e1207b1'; // Reemplaza con tu clave API de OpenWeatherMap
     var url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lng}&units=metric&lang=es&appid=${apiKey}`; // URL de la API de OpenWeatherMap
 
     fetch(url) // Realiza una solicitud GET a la API de OpenWeatherMap
@@ -20,3 +20,5 @@ function getWeather(lat, lng) {
             console.error('Error al obtener el clima:', error); // Muestra un mensaje de error en la consola
         });
 }
+
+export { getWeather };
