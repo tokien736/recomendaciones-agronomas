@@ -1,4 +1,3 @@
-// Mock de Firebase para Jest
 jest.mock('../firebase', () => ({
     convertirHumedadSuelo: jest.fn((valor) => (valor / 1023) * 100),
     onValue: jest.fn((ref, callback) => {
