@@ -6,6 +6,7 @@ import Recomendaciones from './components/Recomendaciones';
 import TrefleAPI from './components/TrefleAPI';
 import { getWeather } from './js/weather';
 
+
 function App() {
   const location = useLocation();
   const [weatherData, setWeatherData] = useState(null);

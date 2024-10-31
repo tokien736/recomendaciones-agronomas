@@ -8,6 +8,9 @@ import Footer from './Footer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faThermometerHalf, faCloud, faTint, faWind } from '@fortawesome/free-solid-svg-icons';
 import { getWeather } from '../js/weather'; // Importar la función getWeather
+import uploadData from '../js/dataUploader'; // Importa la función de dataUploader.js
+
+
 
 const Index = () => {
   // Estado para almacenar los datos del clima y posibles errores
@@ -18,7 +21,17 @@ const Index = () => {
     windSpeed: null,
   });
   const [error, setError] = useState(null); // Estado para manejar errores
+  // Llama a la función de dataUploader para que se ejecute siempre cada 30 segundos
+  useEffect(() => {
+    uploadData(); // Ejecuta uploadData inmediatamente al montar el componente
 
+    // Configura un intervalo para llamar a uploadData cada 30 segundos
+    const interval = setInterval(uploadData, 30 * 1000);
+
+    // Limpia el intervalo cuando el componente se desmonte
+    return () => clearInterval(interval);
+  }, []);
+  
   // Obtener el clima cuando el componente se monta
   useEffect(() => {
     // Inicializar el mapa cuando el componente se monta

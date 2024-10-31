@@ -1,344 +1,221 @@
 {
     "cultivos": [
-        {
-            "nombre": "Tomate",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 50,
-                    "max": 70
-                },
-                "humedad_suelo": {
-                    "min": 60,
-                    "max": 80
-                },
-                "temperatura": {
-                    "min": 18,
-                    "max": 25
-                }
-            }
+      {
+        "nombre": "Tomate",
+        "condiciones": {
+          "humedad_ambiental": { "min": 50, "max": 70 },
+          "humedad_suelo": { "min": 60, "max": 80 },
+          "temperatura": { "min": 18, "max": 25 }
         },
-        {
-            "nombre": "Lechuga",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 60,
-                    "max": 80
-                },
-                "humedad_suelo": {
-                    "min": 50,
-                    "max": 70
-                },
-                "temperatura": {
-                    "min": 15,
-                    "max": 21
-                }
-            }
+        "agua_requerida": "Moderada",
+        "luz_requerida": "Alta",
+        "fertilizacion": "Aplicar fertilizante N-P-K cada 3 semanas",
+        "otros": "Controlar plagas como pulgones y mosca blanca"
+      },
+      {
+        "nombre": "Papa",
+        "condiciones": {
+          "humedad_ambiental": { "min": 50, "max": 75 },
+          "humedad_suelo": { "min": 65, "max": 80 },
+          "temperatura": { "min": 14, "max": 22 }
         },
-        {
-            "nombre": "Maíz",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 40,
-                    "max": 60
-                },
-                "humedad_suelo": {
-                    "min": 50,
-                    "max": 70
-                },
-                "temperatura": {
-                    "min": 18,
-                    "max": 24
-                }
-            }
+        "agua_requerida": "Moderada",
+        "luz_requerida": "Alta",
+        "fertilizacion": "Aplicar fertilizante de potasio al inicio",
+        "otros": "Evitar encharcamientos para prevenir enfermedades"
+      },
+      {
+        "nombre": "Maíz",
+        "condiciones": {
+          "humedad_ambiental": { "min": 40, "max": 60 },
+          "humedad_suelo": { "min": 50, "max": 70 },
+          "temperatura": { "min": 18, "max": 24 }
         },
-        {
-            "nombre": "Zanahoria",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 60,
-                    "max": 80
-                },
-                "humedad_suelo": {
-                    "min": 70,
-                    "max": 80
-                },
-                "temperatura": {
-                    "min": 15,
-                    "max": 21
-                }
-            }
+        "agua_requerida": "Moderada",
+        "luz_requerida": "Alta",
+        "fertilizacion": "Usar fertilizante de nitrógeno alto durante el crecimiento",
+        "otros": "Requiere un riego uniforme durante la fase de crecimiento"
+      },
+      {
+        "nombre": "Quinua",
+        "condiciones": {
+          "humedad_ambiental": { "min": 40, "max": 60 },
+          "humedad_suelo": { "min": 40, "max": 60 },
+          "temperatura": { "min": 15, "max": 20 }
         },
-        {
-            "nombre": "Papa",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 50,
-                    "max": 75
-                },
-                "humedad_suelo": {
-                    "min": 65,
-                    "max": 80
-                },
-                "temperatura": {
-                    "min": 14,
-                    "max": 22
-                }
-            }
+        "agua_requerida": "Moderada",
+        "luz_requerida": "Alta",
+        "fertilizacion": "No requiere mucha fertilización; añadir compost orgánico al inicio",
+        "otros": "Ideal en suelos bien drenados y altitudes altas"
+      },
+      {
+        "nombre": "Café",
+        "condiciones": {
+          "humedad_ambiental": { "min": 60, "max": 80 },
+          "humedad_suelo": { "min": 50, "max": 70 },
+          "temperatura": { "min": 15, "max": 24 }
         },
-        {
-            "nombre": "Fresa",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 60,
-                    "max": 80
-                },
-                "humedad_suelo": {
-                    "min": 70,
-                    "max": 80
-                },
-                "temperatura": {
-                    "min": 18,
-                    "max": 24
-                }
-            }
+        "agua_requerida": "Alta",
+        "luz_requerida": "Sombra parcial",
+        "fertilizacion": "Aplicar fertilizante orgánico cada 3 meses",
+        "otros": "Proteger de vientos fuertes y climas extremos"
+      },
+      {
+        "nombre": "Coca",
+        "condiciones": {
+          "humedad_ambiental": { "min": 60, "max": 90 },
+          "humedad_suelo": { "min": 50, "max": 80 },
+          "temperatura": { "min": 20, "max": 30 }
         },
-        {
-            "nombre": "Café",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 60,
-                    "max": 80
-                },
-                "humedad_suelo": {
-                    "min": 50,
-                    "max": 70
-                },
-                "temperatura": {
-                    "min": 15,
-                    "max": 24
-                }
-            }
+        "agua_requerida": "Alta",
+        "luz_requerida": "Sombra parcial",
+        "fertilizacion": "Fertilizar con compost una vez al mes",
+        "otros": "Crece mejor en suelos bien drenados"
+      },
+      {
+        "nombre": "Sacha Inchi",
+        "condiciones": {
+          "humedad_ambiental": { "min": 60, "max": 80 },
+          "humedad_suelo": { "min": 60, "max": 80 },
+          "temperatura": { "min": 18, "max": 26 }
         },
-        {
-            "nombre": "Arroz",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 70,
-                    "max": 90
-                },
-                "humedad_suelo": {
-                    "min": 70,
-                    "max": 100
-                },
-                "temperatura": {
-                    "min": 20,
-                    "max": 35
-                }
-            }
+        "agua_requerida": "Moderada",
+        "luz_requerida": "Alta",
+        "fertilizacion": "Añadir fertilizante orgánico cada dos meses",
+        "otros": "Requiere poda regular para optimizar la producción"
+      },
+      {
+        "nombre": "Aguaymanto",
+        "condiciones": {
+          "humedad_ambiental": { "min": 50, "max": 70 },
+          "humedad_suelo": { "min": 55, "max": 70 },
+          "temperatura": { "min": 13, "max": 20 }
         },
-        {
-            "nombre": "Trigo",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 40,
-                    "max": 60
-                },
-                "humedad_suelo": {
-                    "min": 50,
-                    "max": 70
-                },
-                "temperatura": {
-                    "min": 10,
-                    "max": 24
-                }
-            }
+        "agua_requerida": "Moderada",
+        "luz_requerida": "Alta",
+        "fertilizacion": "Aplicar compost cada 4 semanas",
+        "otros": "Proteger de heladas en zonas altas"
+      },
+      {
+        "nombre": "Camu Camu",
+        "condiciones": {
+          "humedad_ambiental": { "min": 70, "max": 90 },
+          "humedad_suelo": { "min": 70, "max": 90 },
+          "temperatura": { "min": 24, "max": 30 }
         },
-        {
-            "nombre": "Cebolla",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 60,
-                    "max": 70
-                },
-                "humedad_suelo": {
-                    "min": 50,
-                    "max": 70
-                },
-                "temperatura": {
-                    "min": 13,
-                    "max": 24
-                }
-            }
+        "agua_requerida": "Muy alta",
+        "luz_requerida": "Alta",
+        "fertilizacion": "Agregar compost al inicio del crecimiento",
+        "otros": "Ideal en zonas con alta pluviosidad"
+      },
+      {
+        "nombre": "Pallar",
+        "condiciones": {
+          "humedad_ambiental": { "min": 50, "max": 70 },
+          "humedad_suelo": { "min": 50, "max": 70 },
+          "temperatura": { "min": 20, "max": 28 }
         },
-        {
-            "nombre": "Ajo",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 60,
-                    "max": 70
-                },
-                "humedad_suelo": {
-                    "min": 50,
-                    "max": 70
-                },
-                "temperatura": {
-                    "min": 13,
-                    "max": 24
-                }
-            }
+        "agua_requerida": "Moderada",
+        "luz_requerida": "Alta",
+        "fertilizacion": "Fertilizar con nitrógeno cada 4 semanas",
+        "otros": "Evitar el encharcamiento, ya que las raíces son sensibles"
+      },
+      {
+        "nombre": "Algarrobo",
+        "condiciones": {
+          "humedad_ambiental": { "min": 30, "max": 50 },
+          "humedad_suelo": { "min": 20, "max": 40 },
+          "temperatura": { "min": 25, "max": 35 }
         },
-        {
-            "nombre": "Pepino",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 60,
-                    "max": 80
-                },
-                "humedad_suelo": {
-                    "min": 60,
-                    "max": 80
-                },
-                "temperatura": {
-                    "min": 18,
-                    "max": 25
-                }
-            }
+        "agua_requerida": "Baja",
+        "luz_requerida": "Alta",
+        "fertilizacion": "Requiere poco fertilizante; añadir compost al inicio",
+        "otros": "Es resistente a la sequía; ideal para zonas áridas"
+      },
+      {
+        "nombre": "Lechuga",
+        "condiciones": {
+          "humedad_ambiental": { "min": 60, "max": 80 },
+          "humedad_suelo": { "min": 50, "max": 70 },
+          "temperatura": { "min": 15, "max": 21 }
         },
-        {
-            "nombre": "Pimiento",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 50,
-                    "max": 70
-                },
-                "humedad_suelo": {
-                    "min": 60,
-                    "max": 80
-                },
-                "temperatura": {
-                    "min": 18,
-                    "max": 25
-                }
-            }
+        "agua_requerida": "Alta",
+        "luz_requerida": "Moderada",
+        "fertilizacion": "Aplicar compost orgánico una vez al mes",
+        "otros": "Ideal en suelos con buen drenaje"
+      },
+      {
+        "nombre": "Zanahoria",
+        "condiciones": {
+          "humedad_ambiental": { "min": 60, "max": 80 },
+          "humedad_suelo": { "min": 70, "max": 80 },
+          "temperatura": { "min": 15, "max": 21 }
         },
-        {
-            "nombre": "Calabacín",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 60,
-                    "max": 80
-                },
-                "humedad_suelo": {
-                    "min": 60,
-                    "max": 80
-                },
-                "temperatura": {
-                    "min": 18,
-                    "max": 25
-                }
-            }
+        "agua_requerida": "Baja",
+        "luz_requerida": "Moderada",
+        "fertilizacion": "Aplicar compost en la siembra",
+        "otros": "Aflojar el suelo para evitar raíces deformadas"
+      },
+      {
+        "nombre": "Fresa",
+        "condiciones": {
+          "humedad_ambiental": { "min": 60, "max": 80 },
+          "humedad_suelo": { "min": 70, "max": 80 },
+          "temperatura": { "min": 18, "max": 24 }
         },
-        {
-            "nombre": "Berenjena",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 50,
-                    "max": 70
-                },
-                "humedad_suelo": {
-                    "min": 60,
-                    "max": 80
-                },
-                "temperatura": {
-                    "min": 20,
-                    "max": 30
-                }
-            }
+        "agua_requerida": "Alta",
+        "luz_requerida": "Alta",
+        "fertilizacion": "Fertilizar cada dos semanas con compost",
+        "otros": "Cubrir con plástico para mantener la humedad"
+      },
+      {
+        "nombre": "Arroz",
+        "condiciones": {
+          "humedad_ambiental": { "min": 70, "max": 90 },
+          "humedad_suelo": { "min": 70, "max": 100 },
+          "temperatura": { "min": 20, "max": 35 }
         },
-        {
-            "nombre": "Sandía",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 50,
-                    "max": 70
-                },
-                "humedad_suelo": {
-                    "min": 60,
-                    "max": 80
-                },
-                "temperatura": {
-                    "min": 20,
-                    "max": 30
-                }
-            }
+        "agua_requerida": "Muy alta",
+        "luz_requerida": "Alta",
+        "fertilizacion": "Aplicar nitrógeno antes de la floración",
+        "otros": "Ideal en terrenos inundados"
+      },
+      {
+        "nombre": "Trigo",
+        "condiciones": {
+          "humedad_ambiental": { "min": 40, "max": 60 },
+          "humedad_suelo": { "min": 50, "max": 70 },
+          "temperatura": { "min": 10, "max": 24 }
         },
-        {
-            "nombre": "Melón",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 50,
-                    "max": 70
-                },
-                "humedad_suelo": {
-                    "min": 60,
-                    "max": 80
-                },
-                "temperatura": {
-                    "min": 20,
-                    "max": 30
-                }
-            }
+        "agua_requerida": "Moderada",
+        "luz_requerida": "Alta",
+        "fertilizacion": "Aplicar fertilizante de fósforo durante la germinación",
+        "otros": "Evitar exceso de agua en el suelo"
+      },
+      {
+        "nombre": "Cebolla",
+        "condiciones": {
+          "humedad_ambiental": { "min": 60, "max": 70 },
+          "humedad_suelo": { "min": 50, "max": 70 },
+          "temperatura": { "min": 13, "max": 24 }
         },
-        {
-            "nombre": "Frijol",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 60,
-                    "max": 70
-                },
-                "humedad_suelo": {
-                    "min": 60,
-                    "max": 80
-                },
-                "temperatura": {
-                    "min": 15,
-                    "max": 25
-                }
-            }
+        "agua_requerida": "Baja",
+        "luz_requerida": "Alta",
+        "fertilizacion": "Agregar abono orgánico antes de la siembra",
+        "otros": "No regar en exceso para evitar pudrición"
+      },
+      {
+        "nombre": "Pepino",
+        "condiciones": {
+          "humedad_ambiental": { "min": 60, "max": 80 },
+          "humedad_suelo": { "min": 60, "max": 80 },
+          "temperatura": { "min": 18, "max": 25 }
         },
-        {
-            "nombre": "Guisante",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 60,
-                    "max": 80
-                },
-                "humedad_suelo": {
-                    "min": 60,
-                    "max": 80
-                },
-                "temperatura": {
-                    "min": 15,
-                    "max": 25
-                }
-            }
-        },
-        {
-            "nombre": "Lenteja",
-            "condiciones": {
-                "humedad_ambiental": {
-                    "min": 50,
-                    "max": 60
-                },
-                "humedad_suelo": {
-                    "min": 50,
-                    "max": 70
-                },
-                "temperatura": {
-                    "min": 10,
-                    "max": 20
-                }
-            }
-        }
+        "agua_requerida": "Alta",
+        "luz_requerida": "Alta",
+        "fertilizacion": "Aplicar compost cada 3 semanas",
+        "otros": "Mantener humedad constante en el suelo"
+      }
     ]
-}
+  }
+  

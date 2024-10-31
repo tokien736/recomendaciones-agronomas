@@ -3,7 +3,7 @@ import { getDatabase, ref, push } from "https://www.gstatic.com/firebasejs/9.6.1
 
 // Configuración de Firebase
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
+  apiKey: "AIzaSyDyIV7FPBcJm7B26FxIy2o4BTKfWioVrdQ",
   authDomain: "agronomia-81952.firebaseapp.com",
   databaseURL: "https://agronomia-81952-default-rtdb.firebaseio.com",
   projectId: "agronomia-81952",
@@ -50,3 +50,6 @@ setInterval(sendDataToFirebase, 5 * 60 * 1000);
 
 // Enviar datos inmediatamente al iniciar
 sendDataToFirebase();
+
+// Exportar sendDataToFirebase como exportación por defecto
+export default sendDataToFirebase;
