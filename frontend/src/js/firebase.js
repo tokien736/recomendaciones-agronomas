@@ -1,6 +1,6 @@
 // Importación de los módulos de Firebase
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
-import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+import { getDatabase, ref, onValue, push } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
 
 // Configuración de Firebase
 const firebaseConfig = {
@@ -120,5 +120,51 @@ function actualizarTemperatura(promedio) {
   }
 }
 
+// Función para generar datos aleatorios
+function generateSensorData() {
+  const isSatisfactory = Math.random() < 0.9; // 90% de probabilidad de datos satisfactorios
+
+  let temperature, humidity, soilMoisture;
+
+  if (isSatisfactory) {
+    // Generar datos dentro de rangos satisfactorios
+    temperature = (Math.random() * 5 + 20).toFixed(1); // Rango de 20 a 25 grados Celsius
+    humidity = (Math.random() * 10 + 50).toFixed(1);    // Rango de 50% a 60%
+    soilMoisture = Math.floor(Math.random() * 200 + 600); // Rango de 600 a 800
+  } else {
+    // Generar datos fuera de los rangos satisfactorios
+    temperature = (Math.random() * 15 + 30).toFixed(1); // Rango de 30 a 45 grados Celsius
+    humidity = (Math.random() * 30 + 20).toFixed(1);    // Rango de 20% a 50%
+    soilMoisture = Math.floor(Math.random() * 600);      // Rango de 0 a 600
+  }
+
+  const data = {
+    timestamp: new Date().toISOString(),
+    temperatura: parseFloat(temperature),
+    humedad: parseFloat(humidity),
+    humedad_suelo: soilMoisture
+  };
+
+  console.log("Generando datos del sensor:", data); // Muestra los datos generados en la consola
+  return data;
+}
+
+// Función para enviar datos generados a Firebase
+function sendDataToFirebase() {
+  const data = generateSensorData(); // Genera y muestra los datos
+  console.log('Enviando datos:', data);
+
+  push(dataRef, data) // Reemplaza `dataRef` con tu referencia de Firebase.
+    .then(() => {
+      console.log('Datos enviados correctamente a Firebase');
+    })
+    .catch((error) => {
+      console.error('Error al enviar datos a Firebase:', error);
+    });
+}
+
+// Enviar datos automáticamente cada 1.5 minutos (90 segundos)
+setInterval(sendDataToFirebase, 90 * 1000);
+
 // Exporta referencias a la base de datos y funciones de Firebase
-export { database, ref, onValue, dataRef };
+export { database, ref, onValue, dataRef, sendDataToFirebase, generateSensorData };

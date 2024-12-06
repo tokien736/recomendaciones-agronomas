@@ -8,15 +8,16 @@ import Header from './Header';
 import Footer from './Footer';
 import { createHumidityBarChart, createSoilHumidityBarChart, createTemperatureBarChart } from '../js/graficas'; 
 import { Chart, registerables } from 'chart.js';
+import { obtenerPromediosSensores } from '../js/model'; // Importar la lógica de obtención de promedios
 
 // Registrar los componentes de Chart.js
 Chart.register(...registerables);
 
 const Sensores = () => {
   const [promedios, setPromedios] = useState({
-    humedad: 65,
-    humedad_suelo: 40,
-    temperatura: 22,
+    humedad: 0,
+    humedadSuelo: 0,
+    temperatura: 0,
   });
   const [weather, setWeather] = useState(null);
 
@@ -24,6 +25,23 @@ const Sensores = () => {
   const humidityChartRef = useRef(null);
   const soilHumidityChartRef = useRef(null);
   const temperatureChartRef = useRef(null);
+
+  // Obtener los datos promedio de los sensores al montar el componente
+  useEffect(() => {
+    const fetchPromedios = async () => {
+      const data = await obtenerPromediosSensores();
+      if (data) {
+        setPromedios({
+          humedad: data.humedad || 0,
+          humedadSuelo: data.humedad_suelo || 0,
+          temperatura: data.temperatura || 0,
+        });
+      } else {
+        console.warn("No se encontraron datos de promedio válidos.");
+      }
+    };
+    fetchPromedios();
+  }, []);
 
   useEffect(() => {
     initMap(); // Inicializa el mapa
@@ -44,7 +62,7 @@ const Sensores = () => {
     if (soilHumidityChartRef.current) {
       soilHumidityChartRef.current.destroy(); // Destruye el gráfico anterior si existe
     }
-    soilHumidityChartRef.current = createSoilHumidityBarChart('soilHumidityChart', 'Humedad del Suelo', promedios.humedad_suelo);
+    soilHumidityChartRef.current = createSoilHumidityBarChart('soilHumidityChart', 'Humedad del Suelo', promedios.humedadSuelo);
 
     if (temperatureChartRef.current) {
       temperatureChartRef.current.destroy(); // Destruye el gráfico anterior si existe
@@ -61,7 +79,7 @@ const Sensores = () => {
 
   return (
     <div>
-      <Header /> {/* Aquí se incluye el Header */}
+      <Header />
       <div className="container mt-5">
         <h1 className="text-center mb-5">Datos de Sensores Agronómicos</h1>
 
@@ -72,7 +90,7 @@ const Sensores = () => {
               <div className="card-body">
                 <h5 className="card-title">Humedad Ambiental</h5>
                 <p className="card-text">
-                  <strong>{promedios.humedad}%</strong>
+                  <strong>{promedios.humedad.toFixed(2)}%</strong>
                 </p>
                 <canvas id="humidityChart" width="300" height="300"></canvas>
               </div>
@@ -84,7 +102,7 @@ const Sensores = () => {
               <div className="card-body">
                 <h5 className="card-title">Humedad del Suelo</h5>
                 <p className="card-text">
-                  <strong>{promedios.humedad_suelo}%</strong>
+                  <strong>{promedios.humedadSuelo.toFixed(2)}%</strong>
                 </p>
                 <canvas id="soilHumidityChart" width="300" height="300"></canvas>
               </div>
@@ -96,7 +114,7 @@ const Sensores = () => {
               <div className="card-body">
                 <h5 className="card-title">Temperatura</h5>
                 <p className="card-text">
-                  <strong>{promedios.temperatura}°C</strong>
+                  <strong>{promedios.temperatura.toFixed(2)}°C</strong>
                 </p>
                 <canvas id="temperatureChart" width="300" height="300"></canvas>
               </div>
@@ -135,7 +153,7 @@ const Sensores = () => {
           <div id="map" className="rounded shadow-sm" style={{ height: '400px', width: '100%' }}></div>
         </div>
       </div>
-      <Footer /> {/* Aquí se incluye el Footer */}
+      <Footer />
     </div>
   );
 };
